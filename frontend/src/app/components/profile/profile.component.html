@@ -1,0 +1,92 @@
+<div class="container mt-5">
+  <div *ngIf="!hasError; else errorTemplate">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3>Perfil de Usuario</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                class="form-control"
+                placeholder="Correo electrónico"
+                readonly
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="id" class="form-label">ID de Usuario</label>
+              <input
+                id="id"
+                type="text"
+                formControlName="id"
+                class="form-control"
+                placeholder="ID de usuario"
+                readonly
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="createdAt" class="form-label">Fecha registro</label>
+              <input
+                id="createdAt"
+                type="date"
+                formControlName="createdAt"
+                class="form-control"
+                placeholder="Fecha de registro"
+                readonly
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="isActive" class="form-label">Activo: </label>
+              <input
+                id="isActive"
+                type="text"
+                formControlName="isActive"
+                class="form-control"
+                readonly
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="isActive" class="form-label">Rol: </label>
+              <input
+                id="roleName"
+                type="text"
+                formControlName="roleName"
+                class="form-control"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="d-flex justify-content-end mt-4">
+            <button
+              type="button"
+              class="btn btn-danger mx-2"
+              (click)="logout()"
+            >
+              Cerrar sesión
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deactivateAccount()"
+            >
+              Desactivar cuenta
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plantilla alternativa si hay un error -->
+  <ng-template #errorTemplate>
+    <div class="alert alert-danger" role="alert">
+      Ha ocurrido un error al cargar el perfil. Por favor, inténtalo nuevamente
+      más tarde.
+    </div>
+  </ng-template>
+</div>

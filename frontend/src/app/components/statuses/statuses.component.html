@@ -1,0 +1,51 @@
+<div
+  class="container d-flex flex-column justify-content-center align-items-center mt-5"
+>
+  <!-- Mensaje de bienvenida -->
+  <div class="text-center mb-4">
+    <h1>Statuses</h1>
+  </div>
+  <!-- Tareas del usuario -->
+  <form
+    [formGroup]="form"
+    (submit)="handleSubmit()"
+    class="w-100"
+    style="max-width: 400px"
+  >
+    <div class="mb-3">
+      <label for="statusName" class="form-label">Status Name:</label>
+      <input
+        type="text"
+        id="statusName"
+        formControlName="statusName"
+        class="form-control"
+        placeholder="Ingrese el nombre del status"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Crear</button>
+  </form>
+  <div *ngIf="statuses.length > 0; else noStatuses" class="w-100">
+    <ul class="list-group">
+      @for (status of statuses; track status.id) {
+      <app-status [status]="status"></app-status>
+      }
+    </ul>
+  </div>
+  <!-- Plantilla alternativa para no roles -->
+  <ng-template #noStatuses>
+    <!-- Mensaje de carga mientras se esperan los roles -->
+    <div class="col-12 text-center" *ngIf="loading">
+      <!-- Aquí puedes usar un spinner o algún indicador de carga -->
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+    <!-- Mensaje si no hay roles y no hay error -->
+    <p *ngIf="!hasError && !loading">No tienes status registrados.</p>
+    <!-- Mensaje de error si ocurre un problema -->
+    <p *ngIf="hasError" class="text-danger">
+      Ocurrió un error al cargar los status.
+    </p>
+  </ng-template>
+</div>

@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Mostrar un spinner de carga si isLoading es verdadero -->
+    <ng-container *ngIf="isLoading; else userContent">
+      <div class="col-12 text-center">
+        <!-- Aquí puedes usar un spinner o algún indicador de carga -->
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Mostrar el contenido después de que termine de cargar o en caso de error -->
+    <ng-template #userContent>
+      <!-- Mostrar error si hasError es verdadero -->
+      <ng-container *ngIf="hasError">
+        <div class="col-12 text-center">
+          <div class="alert alert-danger" role="alert">
+            Error: {{ errorMsg }}
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Mostrar la lista de usuarios si no hay errores -->
+      <ng-container *ngIf="!hasError">
+        <div *ngFor="let user of users" class="col-md-4 col-sm-6 col-xs-12 mb-4">
+          <!-- Componente de Usuario con Card -->
+          <app-user [user]="user"></app-user>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
+</div>

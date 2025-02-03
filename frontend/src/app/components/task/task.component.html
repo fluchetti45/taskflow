@@ -1,0 +1,21 @@
+<div class="card shadow-sm rounded mt-4 mx-auto" style="max-width: 600px">
+  <div class="card-body text-white" [ngClass]="statusClass">
+    <h5 class="card-title fw-bold text-center">{{ task.title }}</h5>
+    <p>{{ task.description }}</p>
+    <p class="card-text">
+      <strong>Status:</strong> {{ task.statusName }}<br />
+    </p>
+    <p class="card-text">
+      <strong>Created At:</strong> {{ task.createdAt | date : "medium" }}
+    </p>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-outline-light me-2" (click)="onEdit()">
+        <i class="bi bi-pencil-fill"></i>
+      </button>
+
+      <button class="btn btn-outline-light" (click)="onDelete()">
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+  </div>
+</div>

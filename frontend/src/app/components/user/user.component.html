@@ -1,0 +1,50 @@
+<div class="card shadow-sm border-light rounded">
+  <div class="card-header bg-primary text-white text-center">
+    <h5 class="card-title mb-0">Detalles del Usuario</h5>
+  </div>
+  <div class="card-body">
+    <dl class="row">
+      <!-- ID -->
+      <dt class="col-4 font-weight-bold">ID:</dt>
+      <dd class="col-8">{{ user.id }}</dd>
+
+      <!-- Email -->
+      <dt class="col-4 font-weight-bold">Email:</dt>
+      <dd class="col-8">{{ user.email }}</dd>
+
+      <!-- Fecha de Creación -->
+      <dt class="col-4 font-weight-bold">Fecha de Creación:</dt>
+      <dd class="col-8">{{ user.createdAt | date }}</dd>
+
+      <!-- Rol -->
+      <dt class="col-4 font-weight-bold">Rol:</dt>
+      <dd class="col-8">{{ user.roleName }}</dd>
+
+      <!-- Estado -->
+      <dt class="col-4 font-weight-bold">Estado:</dt>
+      <dd class="col-8">
+        <span
+          class="badge"
+          [ngClass]="{
+            'bg-success': user.isActive,
+            'bg-danger': !user.isActive
+          }"
+        >
+          {{ user.isActive ? "Activo" : "Inactivo" }}
+        </span>
+      </dd>
+    </dl>
+  </div>
+  <div class="card-footer text-center">
+    <button
+      class="btn btn-outline-primary"
+      (click)="handleActivation(user.id)"
+      [disabled]="user.roleName == 'Admin'"
+    >
+      {{ user.isActive ? "Desactivar" : "Activar" }}
+    </button>
+    <button class="btn btn-outline-primary mx-2" (click)="handleRole(user.id)">
+      {{ user.roleName == "Admin" ? "Quitar admin" : "Hacer admin" }}
+    </button>
+  </div>
+</div>

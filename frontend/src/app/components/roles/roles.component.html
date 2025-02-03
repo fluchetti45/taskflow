@@ -1,0 +1,35 @@
+<div
+  class="container d-flex flex-column justify-content-center align-items-center mt-5"
+>
+  <!-- Mensaje de bienvenida -->
+  <div class="text-center mb-4">
+    <h1 class="display-4 text-primary">Roles</h1>
+  </div>
+
+  <form
+    [formGroup]="form"
+    (submit)="handleSubmit()"
+    class="w-100"
+    style="max-width: 400px"
+  >
+    <div class="mb-3">
+      <label for="roleName" class="form-label">Role Name:</label>
+      <input
+        type="text"
+        id="roleName"
+        formControlName="roleName"
+        class="form-control"
+        placeholder="Ingrese el nombre del rol"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Crear</button>
+  </form>
+
+  <!-- Roles -->
+  <div class="w-100 mt-4">
+    @for (role of roles; track role.id) {
+    <app-role [role]="role"></app-role>
+    }
+  </div>
+</div>

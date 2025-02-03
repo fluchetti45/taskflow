@@ -1,0 +1,19 @@
+<div class="card mt-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title text-secondary">{{ role.roleName }}</h5>
+      <p class="card-text">
+        <strong>ID:</strong> {{ role.id }}
+      </p>
+      <p class="card-text">
+        <strong>Creado el:</strong> {{ role.createdAt | date:'dd/MM/yyyy' }}
+      </p>
+      <p class="card-text">
+        <strong>Active:</strong>{{role.isActive}}
+      </p>
+      <div class="d-flex">
+        <button class="btn btn-outline-primary">Editar</button>
+        <button type="button" class="btn btn-outline-danger mx-1" (click)="handleDelete(role.id)">Borrar</button>
+      </div>
+    </div>
+  </div>
+  

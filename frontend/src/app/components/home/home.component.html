@@ -1,0 +1,65 @@
+<div class="d-flex flex-row min-vh-100 bg-light">
+  <!-- Formulario de creación -->
+  <div class="col-md-4">
+    <app-create-task-form
+      (taskCreated)="handleTaskCreated($event)"
+      (taskEdited)="handleTaskEdit($event)"
+      [statuses]="statuses"></app-create-task-form>
+  </div>
+  <!-- Lista de tareas -->
+  <div class="col-md-8">
+    <div *ngIf="!isLoading; else Loading">
+      <form
+        class="form-inline mb-4 d-flex align-items-center justify-content-center flex-wrap gap-2"
+        [formGroup]="filterForm"
+        style="max-width: 600px; margin: 0 auto">
+        <label for="filter" class="me-2">Filtro</label>
+        <select
+          id="filter"
+          formControlName="statusFilter"
+          class="form-select me-2"
+          style="width: auto">
+          @for (status of statuses; track status.id) {
+          <option [value]="status.id">{{ status.statusName }}</option>
+          }
+        </select>
+        <button (click)="handleFilter()" class="btn btn-outline-primary">
+          Filtrar
+        </button>
+        <button (click)="handleResetFilter()" class="btn btn-outline-secondary">
+          Restaurar
+        </button>
+      </form>
+      <!-- Tareas -->
+      <ng-container *ngIf="hasFilter; else noFilter">
+        <p>
+          Tareas: <strong> {{ selectedStatus }} </strong>
+        </p>
+        <div *ngIf="tareasFiltradas.length > 0; else noTareas">
+          <app-task
+            *ngFor="let tarea of tareasFiltradas"
+            [task]="tarea"
+            (deleteTask)="handleDelete($event)"></app-task>
+        </div>
+      </ng-container>
+
+      <ng-template #noFilter>
+        <div *ngIf="tareas.length > 0; else noTareas">
+          <app-task
+            *ngFor="let tarea of tareas"
+            [task]="tarea"
+            (deleteTask)="handleDelete($event)"></app-task>
+        </div>
+      </ng-template>
+
+      <ng-template #noTareas>
+        <p class="text-muted text-center">No tienes tareas registradas.</p>
+      </ng-template>
+    </div>
+    <ng-template #Loading>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </ng-template>
+  </div>
+</div>

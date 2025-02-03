@@ -1,0 +1,54 @@
+<div class="card shadow-sm rounded bg-white mb-4">
+  <div class="card-body">
+    <h5 class="card-title text-primary">Nueva tarea</h5>
+    <form [formGroup]="taskForm" (submit)="onSubmit()" #formTask>
+      <div class="mb-3">
+        <label for="title" class="form-label">Titulo</label>
+        <input
+          class="form-control"
+          id="title"
+          formControlName="title"
+          placeholder="Titulo de la tarea..."
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea
+          class="form-control"
+          id="description"
+          formControlName="description"
+          cols="3"
+          rows="5"
+          placeholder="Describe tu tarea..."
+        >
+        </textarea>
+      </div>
+      <div class="mb-3">
+        <label for="dropdown" class="form-label">Estado de la tarea</label>
+        <select id="dropdown" formControlName="status" class="form-select">
+          @for (status of statuses; track status.id) {
+          <option [value]="status.id">{{ status.statusName }}</option>
+          }
+        </select>
+      </div>
+      <div class="mb-3">
+        <button
+          type="submit"
+          class="btn btn-outline-primary d-block w-100 mb-2"
+        >
+          {{ !taskToEdit ? "Crear" : "Editar" }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary d-block w-100"
+          (click)="resetTaskForm()"
+        >
+          Restaurar
+        </button>
+      </div>
+      <div *ngIf="formErrors" class="mb-3">
+        <p class="text-danger">Errores en el formulario</p>
+      </div>
+    </form>
+  </div>
+</div>
